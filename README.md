@@ -32,31 +32,131 @@ _Change to the owner(s) of the new repo. (This template's owners are:)_
 </p>
 <hr>
 
-## Project description
-_Use one of these:_
+## Project Description
+This project aims to measure and compare transcription speed improvements across different transcription methods using a benchmark dataset. The study specifically focuses on the GR (Garchen Rinpoche) catalog, comparing transcription speeds between manual transcription, base STT model-assisted transcription, and fine-tuned model-assisted transcription.
 
-With _Project Name_ you can _verb_ _noun_...
+## Objective
+To quantitatively assess the difference in transcription rates under three conditions:
+1. Pure manual transcription (no reference)
+2. Transcription with base STT model reference
+3. Transcription with fine-tuned STT model reference
 
-_Project Name_ helps you _verb_ _noun_...
+## Methodology
 
+### 1. Benchmark Dataset Selection
+- Using unseen data to eliminate model bias
+- Dataset comprises 38 original audio IDs
+- Each audio file is segmented into multiple parts
 
-## Who this project is for
-This project is intended for _target user_ who wants to _user objective_.
+### 2. Character Length Analysis
+1. Initial Analysis:
+   - Calculate character length statistics for each audio segment
+   - Group segments by their original audio ID
+   - Generate character length distribution report for each original audio
 
+2. Filtering Criteria:
+   - Select segments with character length ≥ 30 characters
+   - Focus on character length groups with 3 or more instances
+   - Rationale: Longer segments better demonstrate transcription speed differences
 
-## Project dependencies
-Before using _Project Name_, ensure you have:
-* _Prerequisite 1_
-* _Prerequisite 2_
-* _Prerequisite 3..._
+### 3. Data Distribution Strategy
+1. Grouping:
+   - Group audio segments by character length ranges (bins)
+   - Ensure each group has at least 3 segments
+   - Segments are from the same original audio ID
 
+2. Distribution Rules:
+   - One segment from each group goes to each CSV file
+   - All segments in the same row number across CSVs have similar character length
+   - Segments in same row are from same original audio ID but different parts
 
-## Instructions for use
-Get started with _Project Name_ by _(write the first step a user needs to start using the project. Use a verb to start.)_.
+### 4. Test Design Considerations
 
+1. Audio Source Control:
+   - Same row across CSVs uses segments from same original audio
+   - Prevents quality/environment variations affecting results
+   - Different segments prevent memorization bias
 
-### Install _Project Name_
-1. _Write the step here._ 
+2. Character Length Balance:
+   - Similar total character length across all three CSVs
+   - Achieved through equal distribution within character length bins
+
+3. Test Files Structure:
+   - **File 1 (Manual)**: Audio only, no transcript
+   - **File 2 (Base Model)**: Audio + base model transcript
+   - **File 3 (Fine-tuned)**: Audio + fine-tuned model transcript
+
+## Test Execution
+
+### For Each CSV File:
+1. **Manual Transcription (CSV 1)**
+   - Transcriber listens to audio
+   - Creates transcript from scratch
+   - Time recorded from audio start to transcription completion
+
+2. **Base Model Reference (CSV 2)**
+   - Transcriber listens to audio
+   - Edits provided base model transcript
+   - Time recorded for complete edit process
+
+3. **Fine-tuned Model Reference (CSV 3)**
+   - Transcriber listens to audio
+   - Edits provided fine-tuned model transcript
+   - Time recorded for complete edit process
+
+## Analysis Metrics
+
+1. Time Comparison:
+   - Total time taken for each method
+   - Speed improvement percentages
+   - Average time per character
+
+2. Quality Control:
+   - Character length consistency across files
+   - Audio source consistency within rows
+   - Segment distribution fairness
+
+## Expected Outcomes
+
+- Quantitative comparison of transcription speeds
+- Statistical evidence of efficiency improvements
+- Documentation of time savings across methods
+- Insights into optimal transcription workflow
+
+## Workflow Steps
+
+### 1. Character Length Analysis
+```bash
+jupyter notebook create_stt_stats.ipynb
+```
+This notebook:
+- Analyzes audio segment character lengths
+- Groups segments by original audio ID
+- Generates detailed character length distribution report
+- Identifies segments meeting test criteria:
+  * Character length ≥ 30
+  * Groups with 3+ similar length segments
+  * Same original audio ID
+
+### 2. Filter Test Data
+Using the analysis from `create_stt_stats.ipynb`:
+- Filter out segments that don't meet criteria
+- Group remaining segments by:
+  * Original audio ID
+  * Character length range
+- Ensure each group has at least 3 segments
+
+### 3. Distribute Data
+```bash
+python create_csv.py
+```
+This script:
+- Takes filtered segments from analysis
+- Distributes them evenly across three CSV files
+- Ensures:
+  * Same row numbers have similar character lengths
+  * Segments in same row are from same original audio
+  * No segment repetition across files
 
     _Explanatory text here_ 
     

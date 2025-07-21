@@ -1,0 +1,4 @@
+method,total_time_minutes,total_characters,segments_count,chars_per_minute,time_saved_vs_manual,speed_improvement_percent
+base,102.63,5116,93,49.85,3.52,3.31
+finetuned,65.55,5091,93,77.67,40.6,38.25
+manual,106.15,5080,93,47.86,0.0,0.0

@@ -1,0 +1,5 @@
+transcriber,chars_per_minute_base,chars_per_minute_finetuned,chars_per_minute_manual,speed_improvement_percent_base,speed_improvement_percent_finetuned,speed_improvement_percent_manual
+Transcriber 1,54.69,94.57,55.4,-6.64,34.42,0.0
+Transcriber 2,42.27,57.79,37.7,35.69,47.11,0.0
+Transcriber 3,69.87,183.56,78.63,-18.02,45.44,0.0
+Transcriber 4,56.47,73.92,56.99,-36.2,12.73,0.0

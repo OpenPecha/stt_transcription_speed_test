@@ -1,0 +1,8 @@
+Transcription Speed Analysis: Garchen Rinpoche's Teachings
+Audio Transcription Performance Evaluation Report
+================================================================
+
+Dataset: Selected segments from Garchen Rinpoche's teachings
+Number of transcribers: 4
+Total segments per transcriber: 25
+Total characters transcribed: 15287
