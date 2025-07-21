@@ -1,0 +1,4 @@
+method,total_time_minutes_mean,total_time_minutes_std,total_time_minutes_min,total_time_minutes_max,chars_per_minute_mean,chars_per_minute_std,chars_per_minute_min,chars_per_minute_max,speed_improvement_percent_mean,speed_improvement_percent_std,speed_improvement_percent_min,speed_improvement_percent_max
+base,25.66,5.56,17.4,29.28,55.83,11.3,42.27,69.87,-6.29,30.52,-36.2,35.69
+finetuned,16.39,5.87,10.7,24.08,102.46,56.12,57.79,183.56,34.93,15.83,12.73,47.11
+manual,26.54,13.06,16.32,45.53,57.18,16.76,37.7,78.63,0.0,0.0,0.0,0.0
